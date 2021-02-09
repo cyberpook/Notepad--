@@ -67,18 +67,16 @@ namespace Notepad__
             // 
             // mainBox
             // 
-
             this.mainBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.mainBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.mainBox.Location = new System.Drawing.Point(12, 28);
             this.mainBox.Name = "mainBox";
-            this.mainBox.Size = new System.Drawing.Size(797, 274);
+            this.mainBox.Size = new System.Drawing.Size(797, 265);
             this.mainBox.TabIndex = 0;
             this.mainBox.Text = "";
-
             this.mainBox.TextChanged += new System.EventHandler(this.mainBox_TextChanged);
-
             // 
             // toolStrip1
             // 
@@ -203,72 +201,72 @@ namespace Notepad__
             // Edit_UndoButton
             // 
             this.Edit_UndoButton.Name = "Edit_UndoButton";
-            this.Edit_UndoButton.Size = new System.Drawing.Size(176, 22);
-            this.Edit_UndoButton.Text = "Undo             Ctrl+Z";
+            this.Edit_UndoButton.Size = new System.Drawing.Size(236, 22);
+            this.Edit_UndoButton.Text = "Undo                                 Ctrl+Z";
             this.Edit_UndoButton.Click += new System.EventHandler(this.Edit_Undo_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(173, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // Edit_CutButton
             // 
             this.Edit_CutButton.Name = "Edit_CutButton";
-            this.Edit_CutButton.Size = new System.Drawing.Size(176, 22);
-            this.Edit_CutButton.Text = "Cut";
+            this.Edit_CutButton.Size = new System.Drawing.Size(236, 22);
+            this.Edit_CutButton.Text = "Cut                                    Ctrl+X";
             this.Edit_CutButton.Click += new System.EventHandler(this.Edit_CutButton_Click);
             // 
             // Edit_CopyButton
             // 
             this.Edit_CopyButton.Name = "Edit_CopyButton";
-            this.Edit_CopyButton.Size = new System.Drawing.Size(176, 22);
-            this.Edit_CopyButton.Text = "Copy";
+            this.Edit_CopyButton.Size = new System.Drawing.Size(236, 22);
+            this.Edit_CopyButton.Text = "Copy                                 Ctrl+C";
             this.Edit_CopyButton.Click += new System.EventHandler(this.Edit_CopyButton_Click);
             // 
             // Edit_PasteButton
             // 
             this.Edit_PasteButton.Name = "Edit_PasteButton";
-            this.Edit_PasteButton.Size = new System.Drawing.Size(176, 22);
-            this.Edit_PasteButton.Text = "Paste";
+            this.Edit_PasteButton.Size = new System.Drawing.Size(236, 22);
+            this.Edit_PasteButton.Text = "Paste                                 Ctrl+V";
             this.Edit_PasteButton.Click += new System.EventHandler(this.Edit_PasteButton_Click);
             // 
             // Edit_DeleteButton
             // 
             this.Edit_DeleteButton.Name = "Edit_DeleteButton";
-            this.Edit_DeleteButton.Size = new System.Drawing.Size(176, 22);
-            this.Edit_DeleteButton.Text = "Delete";
+            this.Edit_DeleteButton.Size = new System.Drawing.Size(236, 22);
+            this.Edit_DeleteButton.Text = "Delete                               Del";
             this.Edit_DeleteButton.Click += new System.EventHandler(this.Edit_DeleteButton_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(173, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // Edit_FindButton
             // 
             this.Edit_FindButton.Name = "Edit_FindButton";
-            this.Edit_FindButton.Size = new System.Drawing.Size(176, 22);
-            this.Edit_FindButton.Text = "Find";
+            this.Edit_FindButton.Size = new System.Drawing.Size(236, 22);
+            this.Edit_FindButton.Text = "Find (under development)";
             this.Edit_FindButton.Click += new System.EventHandler(this.Edit_FindButton_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(173, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // Edit_SelectAllButton
             // 
             this.Edit_SelectAllButton.Name = "Edit_SelectAllButton";
-            this.Edit_SelectAllButton.Size = new System.Drawing.Size(176, 22);
-            this.Edit_SelectAllButton.Text = "Select All";
+            this.Edit_SelectAllButton.Size = new System.Drawing.Size(236, 22);
+            this.Edit_SelectAllButton.Text = "Select All                          Ctrl+A";
             this.Edit_SelectAllButton.Click += new System.EventHandler(this.Edit_SelectAllButton_Click);
             // 
             // Edit_TimeDateButton
             // 
             this.Edit_TimeDateButton.Name = "Edit_TimeDateButton";
-            this.Edit_TimeDateButton.Size = new System.Drawing.Size(176, 22);
-            this.Edit_TimeDateButton.Text = "Time\\Date";
+            this.Edit_TimeDateButton.Size = new System.Drawing.Size(236, 22);
+            this.Edit_TimeDateButton.Text = "Time\\Date                        F5";
             this.Edit_TimeDateButton.Click += new System.EventHandler(this.Edit_TimeDateButton_Click);
             // 
             // toolStripDropDownButton1
@@ -310,28 +308,28 @@ namespace Notepad__
             this.smallerToolStripMenuItem,
             this.defaultToolStripMenuItem});
             this.ScaleButton.Name = "ScaleButton";
-            this.ScaleButton.Size = new System.Drawing.Size(101, 22);
+            this.ScaleButton.Size = new System.Drawing.Size(180, 22);
             this.ScaleButton.Text = "Scale";
             // 
             // largerToolStripMenuItem
             // 
             this.largerToolStripMenuItem.Name = "largerToolStripMenuItem";
-            this.largerToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.largerToolStripMenuItem.Text = "Larger";
+            this.largerToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.largerToolStripMenuItem.Text = "Larger          Ctrl+Add(+)";
             this.largerToolStripMenuItem.Click += new System.EventHandler(this.largerToolStripMenuItem_Click);
             // 
             // smallerToolStripMenuItem
             // 
             this.smallerToolStripMenuItem.Name = "smallerToolStripMenuItem";
-            this.smallerToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.smallerToolStripMenuItem.Text = "Smaller";
+            this.smallerToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.smallerToolStripMenuItem.Text = "Smaller        Ctrl+Subtract(-)";
             this.smallerToolStripMenuItem.Click += new System.EventHandler(this.smallerToolStripMenuItem_Click);
             // 
             // defaultToolStripMenuItem
             // 
             this.defaultToolStripMenuItem.Name = "defaultToolStripMenuItem";
-            this.defaultToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.defaultToolStripMenuItem.Text = "Default";
+            this.defaultToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
+            this.defaultToolStripMenuItem.Text = "Default         Ctrl+0";
             this.defaultToolStripMenuItem.Click += new System.EventHandler(this.defaultToolStripMenuItem_Click);
             // 
             // notepadMain
@@ -341,9 +339,8 @@ namespace Notepad__
             this.ClientSize = new System.Drawing.Size(821, 305);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.mainBox);
-
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-
             this.Name = "notepadMain";
             this.Text = "Notepad--";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.notepadMain_FormClosing);

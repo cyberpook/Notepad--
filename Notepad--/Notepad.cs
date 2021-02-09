@@ -26,7 +26,7 @@ namespace Notepad__
 
         private void Edit_Undo_Click(object sender, EventArgs e)
         {
-            SendKeys.Send("^(z)");
+            mainBox.Undo();
         }
 
         private void File_Open_Click(object sender, EventArgs e)
@@ -233,6 +233,7 @@ namespace Notepad__
 
         private void smallerToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if(mainBox.Font.Size - 2 < 2) { return; }
             mainBox.Font = new System.Drawing.Font(mainBox.Font.FontFamily.Name, mainBox.Font.Size - 2);
         }
 
@@ -286,7 +287,24 @@ namespace Notepad__
             }
             e.Cancel = false;
         }
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.F5:                               Edit_TimeDateButton_Click(mainBox, null); break;
+                case (Keys.Control | Keys.Add):             largerToolStripMenuItem_Click(mainBox, null); break;
+                case (Keys.Control | Keys.Subtract):        smallerToolStripMenuItem_Click(mainBox, null); break;
+                case (Keys.Control | Keys.D0):              defaultToolStripMenuItem_Click(mainBox, null); break;
+                case (Keys.Control | Keys.N):               File_New_Click(mainBox, null); return true;
+                case (Keys.Control | Keys.Shift | Keys.N):  File_NewWindow_Click(mainBox, null); return true;
+                case (Keys.Control | Keys.O):               File_Open_Click(mainBox, null); return true;
+                case (Keys.Control | Keys.S):               File_Save_Click(mainBox, null); return true;
+                case (Keys.Control | Keys.Shift | Keys.S):  File_SaveAs_Click(mainBox, null); return true;
+            //    case (Keys.Control | Keys.P):               ENTER METHOD NAME (mainBox, null); return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
 
-        
+
     }
 }
