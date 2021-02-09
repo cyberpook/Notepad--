@@ -67,6 +67,7 @@ namespace Notepad__
             // 
             // mainBox
             // 
+
             this.mainBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -75,6 +76,9 @@ namespace Notepad__
             this.mainBox.Size = new System.Drawing.Size(797, 274);
             this.mainBox.TabIndex = 0;
             this.mainBox.Text = "";
+
+            this.mainBox.TextChanged += new System.EventHandler(this.mainBox_TextChanged);
+
             // 
             // toolStrip1
             // 
@@ -114,7 +118,7 @@ namespace Notepad__
             this.File_NewButton.Name = "File_NewButton";
             this.File_NewButton.Size = new System.Drawing.Size(309, 22);
             this.File_NewButton.Text = "New                                                Ctrl+N";
-            this.File_NewButton.Click += new System.EventHandler(this.File_NewFile_Click);
+            this.File_NewButton.Click += new System.EventHandler(this.File_New_Click);
             // 
             // File_NewWindowButton
             // 
@@ -337,8 +341,13 @@ namespace Notepad__
             this.ClientSize = new System.Drawing.Size(821, 305);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.mainBox);
+
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+
             this.Name = "notepadMain";
             this.Text = "Notepad--";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.notepadMain_FormClosing);
+            this.Load += new System.EventHandler(this.notepadMain_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
