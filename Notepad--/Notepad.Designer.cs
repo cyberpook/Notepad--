@@ -57,12 +57,18 @@ namespace Notepad__
             this.Edit_TimeDateButton = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.Format_WordWrapButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.Format_FontButton = new System.Windows.Forms.ToolStripMenuItem();
             this.viewButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.ScaleButton = new System.Windows.Forms.ToolStripMenuItem();
             this.largerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.smallerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.View_StatusBar_Button = new System.Windows.Forms.ToolStripMenuItem();
+            this.StatusBar = new System.Windows.Forms.StatusStrip();
+            this.Status_ScaleLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.toolStrip1.SuspendLayout();
+            this.StatusBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // mainBox
@@ -70,10 +76,11 @@ namespace Notepad__
             this.mainBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.mainBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.mainBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mainBox.Font = new System.Drawing.Font("Consolas", 11F);
             this.mainBox.Location = new System.Drawing.Point(12, 28);
             this.mainBox.Name = "mainBox";
-            this.mainBox.Size = new System.Drawing.Size(797, 265);
+            this.mainBox.Size = new System.Drawing.Size(797, 252);
             this.mainBox.TabIndex = 0;
             this.mainBox.Text = "";
             this.mainBox.TextChanged += new System.EventHandler(this.mainBox_TextChanged);
@@ -208,7 +215,7 @@ namespace Notepad__
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(233, 6);
             // 
             // Edit_CutButton
             // 
@@ -241,7 +248,7 @@ namespace Notepad__
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(233, 6);
             // 
             // Edit_FindButton
             // 
@@ -253,7 +260,7 @@ namespace Notepad__
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(233, 6);
             // 
             // Edit_SelectAllButton
             // 
@@ -273,7 +280,8 @@ namespace Notepad__
             // 
             this.toolStripDropDownButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Format_WordWrapButton});
+            this.Format_WordWrapButton,
+            this.Format_FontButton});
             this.toolStripDropDownButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripDropDownButton1.Image")));
             this.toolStripDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripDropDownButton1.Name = "toolStripDropDownButton1";
@@ -290,11 +298,19 @@ namespace Notepad__
             this.Format_WordWrapButton.Text = "Word Wrap";
             this.Format_WordWrapButton.Click += new System.EventHandler(this.Format_WordWrap_Click);
             // 
+            // Format_FontButton
+            // 
+            this.Format_FontButton.Name = "Format_FontButton";
+            this.Format_FontButton.Size = new System.Drawing.Size(180, 22);
+            this.Format_FontButton.Text = "Font";
+            this.Format_FontButton.Click += new System.EventHandler(this.Format_FontButton_Click);
+            // 
             // viewButton
             // 
             this.viewButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.viewButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ScaleButton});
+            this.ScaleButton,
+            this.View_StatusBar_Button});
             this.viewButton.Image = ((System.Drawing.Image)(resources.GetObject("viewButton.Image")));
             this.viewButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.viewButton.Name = "viewButton";
@@ -308,13 +324,13 @@ namespace Notepad__
             this.smallerToolStripMenuItem,
             this.defaultToolStripMenuItem});
             this.ScaleButton.Name = "ScaleButton";
-            this.ScaleButton.Size = new System.Drawing.Size(180, 22);
+            this.ScaleButton.Size = new System.Drawing.Size(126, 22);
             this.ScaleButton.Text = "Scale";
             // 
             // largerToolStripMenuItem
             // 
             this.largerToolStripMenuItem.Name = "largerToolStripMenuItem";
-            this.largerToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.largerToolStripMenuItem.Size = new System.Drawing.Size(221, 22);
             this.largerToolStripMenuItem.Text = "Larger          Ctrl+Add(+)";
             this.largerToolStripMenuItem.Click += new System.EventHandler(this.largerToolStripMenuItem_Click);
             // 
@@ -332,11 +348,39 @@ namespace Notepad__
             this.defaultToolStripMenuItem.Text = "Default         Ctrl+0";
             this.defaultToolStripMenuItem.Click += new System.EventHandler(this.defaultToolStripMenuItem_Click);
             // 
+            // View_StatusBar_Button
+            // 
+            this.View_StatusBar_Button.Checked = true;
+            this.View_StatusBar_Button.CheckOnClick = true;
+            this.View_StatusBar_Button.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.View_StatusBar_Button.Name = "View_StatusBar_Button";
+            this.View_StatusBar_Button.Size = new System.Drawing.Size(126, 22);
+            this.View_StatusBar_Button.Text = "Status Bar";
+            this.View_StatusBar_Button.Click += new System.EventHandler(this.View_StatusBar_Button_Click);
+            // 
+            // StatusBar
+            // 
+            this.StatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Status_ScaleLabel});
+            this.StatusBar.Location = new System.Drawing.Point(0, 283);
+            this.StatusBar.Name = "StatusBar";
+            this.StatusBar.Size = new System.Drawing.Size(821, 22);
+            this.StatusBar.TabIndex = 2;
+            this.StatusBar.Text = "statusStrip1";
+            // 
+            // Status_ScaleLabel
+            // 
+            this.Status_ScaleLabel.Name = "Status_ScaleLabel";
+            this.Status_ScaleLabel.Size = new System.Drawing.Size(35, 17);
+            this.Status_ScaleLabel.Text = "100%";
+            this.Status_ScaleLabel.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+            // 
             // notepadMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(821, 305);
+            this.Controls.Add(this.StatusBar);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.mainBox);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -347,6 +391,8 @@ namespace Notepad__
             this.Load += new System.EventHandler(this.notepadMain_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            this.StatusBar.ResumeLayout(false);
+            this.StatusBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -386,6 +432,11 @@ namespace Notepad__
         private System.Windows.Forms.ToolStripMenuItem Edit_FindButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem Format_WordWrapButton;
+        private System.Windows.Forms.StatusStrip StatusBar;
+        private System.Windows.Forms.ToolStripStatusLabel Status_ScaleLabel;
+        private System.Windows.Forms.ToolStripMenuItem View_StatusBar_Button;
+        private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.ToolStripMenuItem Format_FontButton;
     }
 }
 

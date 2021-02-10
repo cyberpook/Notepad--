@@ -18,7 +18,7 @@ namespace Notepad__
 
         private string working_directory = "c:\\";
         private string file_name = "Untitled";
-
+       
         public notepadMain()
         {
             InitializeComponent();
@@ -180,7 +180,7 @@ namespace Notepad__
                     case DialogResult.No:
                         break;
                     case DialogResult.Cancel:
-                        break;
+                        return;
                 }
             }
             Application.Exit();
@@ -222,24 +222,28 @@ namespace Notepad__
 
         private void Edit_FindButton_Click(object sender, EventArgs e)
         {
-            Form dialog = new Form();
-            dialog.ShowDialog(this);
+            
         }
 
         private void largerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            mainBox.Font= new System.Drawing.Font(mainBox.Font.FontFamily.Name, mainBox.Font.Size + 2);
+            
+            mainBox.ZoomFactor += (float)0.1;
+            Status_ScaleLabel.Text = $"{(int)(mainBox.ZoomFactor * 10) * 10}%" ;
         }
 
         private void smallerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(mainBox.Font.Size - 2 < 2) { return; }
-            mainBox.Font = new System.Drawing.Font(mainBox.Font.FontFamily.Name, mainBox.Font.Size - 2);
+            
+            if( mainBox.ZoomFactor - 0.1 < 0.1 ) { return; }
+            mainBox.ZoomFactor -= (float)0.1;
+            Status_ScaleLabel.Text = $"{(int)(mainBox.ZoomFactor * 10) * 10}%";
         }
 
         private void defaultToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            mainBox.Font = new System.Drawing.Font(mainBox.Font.FontFamily.Name, 12);
+            mainBox.ZoomFactor = 1.0F;
+            Status_ScaleLabel.Text = $"{(int)(mainBox.ZoomFactor * 10) * 10}%";
         }
 
         private void Format_WordWrap_Click(object sender, EventArgs e)
@@ -305,6 +309,27 @@ namespace Notepad__
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
+        private void View_StatusBar_Button_Click(object sender, EventArgs e)
+        {
+            switch (View_StatusBar_Button.Checked)
+            {
+                case true:  StatusBar.Visible = true; mainBox.Height -= 13; break;
+                case false: StatusBar.Visible = false; mainBox.Height += 13 ; break;
+            }
+        }
 
+        private void Format_FontButton_Click(object sender, EventArgs e)
+        {
+            fontDialog1.ShowColor = true;
+
+            fontDialog1.Font = mainBox.Font;
+            fontDialog1.Color = mainBox.ForeColor;
+
+            if (fontDialog1.ShowDialog() != DialogResult.Cancel)
+            {
+                mainBox.Font = fontDialog1.Font;
+                mainBox.ForeColor = fontDialog1.Color;
+            }
+        }
     }
 }
