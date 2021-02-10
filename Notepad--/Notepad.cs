@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -199,12 +200,13 @@ namespace Notepad__
         private void Edit_CutButton_Click(object sender, EventArgs e)
         {
             mainBox.Cut();
-            
+           
         }
 
         private void Edit_DeleteButton_Click(object sender, EventArgs e)
         {
             SendKeys.Send("{DELETE}");
+
         }
 
         private void Edit_SelectAllButton_Click(object sender, EventArgs e)
@@ -220,9 +222,44 @@ namespace Notepad__
             mainBox.SelectionStart = selectionIndex + date_time.Length;
         }
 
-        private void Edit_FindButton_Click(object sender, EventArgs e)
+        private void SearchWord(string editor_text, string request)
         {
+            var selectionIndex = editor_text.IndexOf(request, StringComparison.CurrentCultureIgnoreCase);
+            if(selectionIndex == -1 )
+            {
+                MessageBox.Show($"There is no '{request}' in this text", "Search result");
+                return;
+            }
+            if (request == "")
+            {
+                MessageBox.Show($"Please, enter your word in the field", "Search result");
+                return;
+            }
+            Status_CurrentWord.Text = $" Current word to find: {request}";
+            mainBox.SelectionStart = selectionIndex;
+            mainBox.SelectionLength = request.Length;
             
+        }
+
+        public static string request = "";
+        public static string curr_word = request;//unnecessary now
+        public static int switcher = 0;
+
+        private void Edit_FindButton_Click(object sender, EventArgs e)//luta dich, grebu iak vorkae
+        {
+            using (FindForm find_form = new FindForm())
+            {
+                if (find_form.ShowDialog() == DialogResult.OK)
+                {
+                    request = find_form.TheValue;
+                }
+
+            }
+            switch (switcher) 
+            {
+                case 1:     SearchWord(mainBox.Text, request); break;
+                case -1:    break;
+            }
         }
 
         private void largerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -330,6 +367,11 @@ namespace Notepad__
                 mainBox.Font = fontDialog1.Font;
                 mainBox.ForeColor = fontDialog1.Color;
             }
+        }
+
+        private void findNextToolStripMenuItem_Click(object sender, EventArgs e)//unnecessary now
+        {
+            
         }
     }
 }
