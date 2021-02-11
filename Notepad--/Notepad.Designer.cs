@@ -70,6 +70,9 @@ namespace Notepad__
             this.setup = new System.Windows.Forms.PageSetupDialog();
             this.DocToPrint = new System.Drawing.Printing.PrintDocument();
             this.print = new System.Windows.Forms.PrintDialog();
+            this.Status_CurrentWord = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.findNextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.StatusBar.SuspendLayout();
             this.SuspendLayout();
@@ -199,6 +202,7 @@ namespace Notepad__
             this.Edit_DeleteButton,
             this.toolStripSeparator2,
             this.Edit_FindButton,
+            this.findNextToolStripMenuItem,
             this.toolStripSeparator3,
             this.Edit_SelectAllButton,
             this.Edit_TimeDateButton});
@@ -364,7 +368,9 @@ namespace Notepad__
             // StatusBar
             // 
             this.StatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Status_ScaleLabel});
+            this.Status_ScaleLabel,
+            this.toolStripStatusLabel1,
+            this.Status_CurrentWord});
             this.StatusBar.Location = new System.Drawing.Point(0, 283);
             this.StatusBar.Name = "StatusBar";
             this.StatusBar.Size = new System.Drawing.Size(821, 22);
@@ -393,6 +399,26 @@ namespace Notepad__
             this.print.AllowSomePages = true;
             this.print.Document = this.DocToPrint;
             this.print.UseEXDialog = true;
+            // Status_CurrentWord
+            // 
+            this.Status_CurrentWord.Name = "Status_CurrentWord";
+            this.Status_CurrentWord.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Status_CurrentWord.Size = new System.Drawing.Size(156, 17);
+            this.Status_CurrentWord.Text = "Current word to find: (none)";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel1.Text = "|";
+            // 
+            // findNextToolStripMenuItem
+            // 
+            this.findNextToolStripMenuItem.Name = "findNextToolStripMenuItem";
+            this.findNextToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.findNextToolStripMenuItem.Text = "Find Next";
+            this.findNextToolStripMenuItem.Click += new System.EventHandler(this.findNextToolStripMenuItem_Click);
             // 
             // notepadMain
             // 
@@ -459,6 +485,9 @@ namespace Notepad__
         private System.Windows.Forms.PageSetupDialog setup;
         private System.Drawing.Printing.PrintDocument DocToPrint;
         private System.Windows.Forms.PrintDialog print;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel Status_CurrentWord;
+        private System.Windows.Forms.ToolStripMenuItem findNextToolStripMenuItem;
     }
 }
 
