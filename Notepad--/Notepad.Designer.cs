@@ -67,6 +67,9 @@ namespace Notepad__
             this.StatusBar = new System.Windows.Forms.StatusStrip();
             this.Status_ScaleLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.setup = new System.Windows.Forms.PageSetupDialog();
+            this.DocToPrint = new System.Drawing.Printing.PrintDocument();
+            this.print = new System.Windows.Forms.PrintDialog();
             this.toolStrip1.SuspendLayout();
             this.StatusBar.SuspendLayout();
             this.SuspendLayout();
@@ -294,14 +297,14 @@ namespace Notepad__
             this.Format_WordWrapButton.CheckOnClick = true;
             this.Format_WordWrapButton.CheckState = System.Windows.Forms.CheckState.Checked;
             this.Format_WordWrapButton.Name = "Format_WordWrapButton";
-            this.Format_WordWrapButton.Size = new System.Drawing.Size(180, 22);
+            this.Format_WordWrapButton.Size = new System.Drawing.Size(134, 22);
             this.Format_WordWrapButton.Text = "Word Wrap";
             this.Format_WordWrapButton.Click += new System.EventHandler(this.Format_WordWrap_Click);
             // 
             // Format_FontButton
             // 
             this.Format_FontButton.Name = "Format_FontButton";
-            this.Format_FontButton.Size = new System.Drawing.Size(180, 22);
+            this.Format_FontButton.Size = new System.Drawing.Size(134, 22);
             this.Format_FontButton.Text = "Font";
             this.Format_FontButton.Click += new System.EventHandler(this.Format_FontButton_Click);
             // 
@@ -375,6 +378,22 @@ namespace Notepad__
             this.Status_ScaleLabel.Text = "100%";
             this.Status_ScaleLabel.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
+            // setup
+            // 
+            this.setup.MinMargins = new System.Drawing.Printing.Margins(1, 1, 1, 1);
+            // 
+            // DocToPrint
+            // 
+            this.DocToPrint.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.PRINTING);
+            // 
+            // print
+            // 
+            this.print.AllowCurrentPage = true;
+            this.print.AllowSelection = true;
+            this.print.AllowSomePages = true;
+            this.print.Document = this.DocToPrint;
+            this.print.UseEXDialog = true;
+            // 
             // notepadMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -437,6 +456,9 @@ namespace Notepad__
         private System.Windows.Forms.ToolStripMenuItem View_StatusBar_Button;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.ToolStripMenuItem Format_FontButton;
+        private System.Windows.Forms.PageSetupDialog setup;
+        private System.Drawing.Printing.PrintDocument DocToPrint;
+        private System.Windows.Forms.PrintDialog print;
     }
 }
 

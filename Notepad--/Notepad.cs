@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -63,10 +65,7 @@ namespace Notepad__
             Application.Run(new notepadMain()); // <-- other form started on its own UI thread
         }
 
-        private void File_Page_Setup_Click(object sender, EventArgs e)
-        {
-
-        }
+        
 
         private void File_New_Click(object sender, EventArgs e)
         {
@@ -117,8 +116,6 @@ namespace Notepad__
 
         private void File_SaveAs_Click(object sender, EventArgs e)
         {
-
-  
             SaveFileDialog saveFile = new SaveFileDialog();
             saveFile.InitialDirectory = Path.GetDirectoryName(working_directory);
             saveFile.FileName = Path.GetFileName(working_directory);
@@ -156,11 +153,163 @@ namespace Notepad__
             
         }
 
-        private void File_Print_Click(object sender, EventArgs e)
+        private object[] settings = new object[]
+            {
+                new Margins(100, 100, 100, 100),
+                new PaperSize("A4", 1169, 827),
+                false,
+                "Microsoft Print to PDF",
+                PrintRange.AllPages
+            };
+        private void File_Page_Setup_Click(object sender, EventArgs e)
         {
+            setup.PageSettings = new PageSettings();
+            setup.PrinterSettings = new PrinterSettings();
 
+            DialogResult result = setup.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                settings = new object[]{
+                    setup.PageSettings.Margins,
+                    setup.PageSettings.PaperSize,
+                    setup.PageSettings.Landscape,
+                    setup.PrinterSettings.PrinterName,
+                    setup.PrinterSettings.PrintRange
+                };
+            }
         }
 
+        private string[] getLines(RichTextBox box)
+        {
+            string[] lines = new string[1];
+            lines[0] = "";
+
+            float maxLength = 627 / (box.Font.Size - 2.4f);
+            int count = 0;
+            string curW = "";
+
+            foreach(char curS in box.Text)
+            {
+                if (curS == ' ')
+                {
+                    if(lines[count].Length + curW.Length >= maxLength)
+                    {
+                        Array.Resize(ref lines, lines.Length + 1);
+                        count++;
+                        lines[count] = curW;
+                        curW = " ";
+                    }
+                    else
+                    {
+                        lines[count] += curW + " ";
+                        curW = "";
+                    }
+                }
+                else if (curS == '\n')
+                {
+                    if (!(lines[count].Length + curW.Length >= maxLength))
+                    {
+                        lines[count] += curW;
+                        curW = "";
+                        Array.Resize(ref lines, lines.Length + 1);
+                        count++;
+                        lines[count] = "\n";
+                    }
+                    else
+                    {
+                        Array.Resize(ref lines, lines.Length + 2);
+                        count += 2;
+                        lines[count - 1] = curW;
+                        lines[count] = "\n";
+                        curW = "";
+                    }
+                    
+                }
+                else
+                {
+                    curW += curS.ToString();
+                }
+            }
+
+            if (lines[count].Length + curW.Length >= maxLength)
+            {
+                Array.Resize(ref lines, lines.Length + 1);
+                count++;
+                lines[count] = curW;
+            }
+            else
+            {
+                lines[count] += curW;
+            }
+
+            return lines;
+
+
+        }
+        int cur = 0;
+        
+
+        private void PRINTING(object sender, PrintPageEventArgs e)
+        {
+
+            float linesPerPage = 0;
+            int count = 0;
+            float yPosition = 0;
+            string[] lines = getLines(mainBox);
+
+            linesPerPage = e.MarginBounds.Height / mainBox.Font.GetHeight(e.Graphics);
+            
+            while (count < linesPerPage && (lines.Length > cur))
+            {
+
+                yPosition = e.MarginBounds.Left + (count * mainBox.Font.GetHeight(e.Graphics));
+                if (yPosition > e.MarginBounds.Bottom)
+                {
+                    e.HasMorePages = true;
+                    return;
+                }
+                e.Graphics.DrawString(lines[cur], mainBox.Font, Brushes.Black, e.MarginBounds.Left, yPosition);
+                if (lines[cur] != null && (lines[cur].Substring(0, 1) == "\n"))
+                {
+                    count++;
+                    yPosition = e.MarginBounds.Left + (count * mainBox.Font.GetHeight(e.Graphics));
+                    
+                }
+                cur++;
+                count++;
+            }
+
+            if (lines.Length > cur)
+            {
+                e.HasMorePages = true;
+                return;
+            }
+            else
+                e.HasMorePages = false;
+
+        }
+        private void File_Print_Click(object sender, EventArgs e)
+        {
+            DocToPrint.DefaultPageSettings.Margins = (Margins)settings[0];
+            DocToPrint.DefaultPageSettings.PaperSize = (PaperSize)settings[1];
+            DocToPrint.DefaultPageSettings.Landscape = (bool)settings[2];
+            DocToPrint.PrinterSettings.PrinterName = (string)settings[3];
+            DocToPrint.PrinterSettings.PrintRange = (PrintRange)settings[4];
+            DocToPrint.PrintPage += new PrintPageEventHandler(PRINTING);
+            if (print.ShowDialog() == DialogResult.OK)
+            {
+                if(mainBox.Text == "")
+                {
+                    MessageBox.Show("The text is empty. Stopping printing...");
+                    return;
+                }
+                DocToPrint.Print();
+                cur = 0;
+
+            }
+        }
+
+        
         private void File_Exit_Click(object sender, EventArgs e)
         {
             if (mainBox.Text != "" && this.Text.Contains("*"))
@@ -295,16 +444,16 @@ namespace Notepad__
         {
             switch (keyData)
             {
-                case Keys.F5:                               Edit_TimeDateButton_Click(mainBox, null); break;
-                case (Keys.Control | Keys.Add):             largerToolStripMenuItem_Click(mainBox, null); break;
-                case (Keys.Control | Keys.Subtract):        smallerToolStripMenuItem_Click(mainBox, null); break;
-                case (Keys.Control | Keys.D0):              defaultToolStripMenuItem_Click(mainBox, null); break;
+                case Keys.F5:                               Edit_TimeDateButton_Click(mainBox, null); return true;
+                case (Keys.Control | Keys.Add):             largerToolStripMenuItem_Click(mainBox, null); return true;
+                case (Keys.Control | Keys.Subtract):        smallerToolStripMenuItem_Click(mainBox, null); return true;
+                case (Keys.Control | Keys.D0):              defaultToolStripMenuItem_Click(mainBox, null); return true;
                 case (Keys.Control | Keys.N):               File_New_Click(mainBox, null); return true;
                 case (Keys.Control | Keys.Shift | Keys.N):  File_NewWindow_Click(mainBox, null); return true;
                 case (Keys.Control | Keys.O):               File_Open_Click(mainBox, null); return true;
                 case (Keys.Control | Keys.S):               File_Save_Click(mainBox, null); return true;
                 case (Keys.Control | Keys.Shift | Keys.S):  File_SaveAs_Click(mainBox, null); return true;
-            //    case (Keys.Control | Keys.P):               ENTER METHOD NAME (mainBox, null); return true;
+                case (Keys.Control | Keys.P):               File_Print_Click(mainBox, null); return true;
             }
             return base.ProcessCmdKey(ref msg, keyData);
         }
@@ -331,5 +480,7 @@ namespace Notepad__
                 mainBox.ForeColor = fontDialog1.Color;
             }
         }
+
+        
     }
 }
