@@ -1,6 +1,6 @@
 # Notepad--
 Notepad-- - simple programm to create and edit text files.
-Notepad-- - successor of well-know Notepad on Windows(but better a lot xD)
+Notepad-- - successor of well-know Notepad on Windows(but way better xD)
 
 You can use Notepad-- to edit, open and save txt files. 
 You can also use Notepad-- for printing, but we strongly do not recommend to use it for printing. At the current time, the printing is at the stage of development.
