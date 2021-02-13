@@ -35,6 +35,26 @@
   <PropertyGroup>
     <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -49,11 +69,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Feedback\Error.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Feedback\Error.Designer.cs">
+      <DependentUpon>Error.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Feedback\Password.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Feedback\Password.Designer.cs">
+      <DependentUpon>Password.cs</DependentUpon>
+    </Compile>
     <Compile Include="FindForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FindForm.Designer.cs">
       <DependentUpon>FindForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AboutUsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutUsForm.Designer.cs">
+      <DependentUpon>AboutUsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Feedback\SendFeedbackForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Feedback\SendFeedbackForm.Designer.cs">
+      <DependentUpon>SendFeedbackForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Notepad.cs">
       <SubType>Form</SubType>
@@ -63,6 +107,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutUsForm.resx">
+      <DependentUpon>AboutUsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Feedback\Error.resx">
+      <DependentUpon>Error.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Feedback\Password.resx">
+      <DependentUpon>Password.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FindForm.resx">
       <DependentUpon>FindForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -78,7 +131,12 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Feedback\SendFeedbackForm.resx">
+      <DependentUpon>SendFeedbackForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -94,6 +152,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="images\cyberpook.jpg" />
+    <None Include="images\github-logo.png" />
+    <None Include="images\Instagram_icon.png" />
+    <None Include="images\AboutUs_background.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

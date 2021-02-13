@@ -12,6 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Mail;
 
 namespace Notepad__
 {
@@ -184,7 +185,7 @@ namespace Notepad__
             string[] lines = new string[1];
             lines[0] = "";
 
-            float maxLength = 627 / (box.Font.Size - 2.4f);
+            float maxLength = 74;
             int count = 0;
             string curW = "";
 
@@ -256,23 +257,24 @@ namespace Notepad__
             int count = 0;
             float yPosition = 0;
             string[] lines = getLines(mainBox);
+            Font fontToPrint = new Font("Consolas", 11, FontStyle.Regular);
 
             linesPerPage = e.MarginBounds.Height / mainBox.Font.GetHeight(e.Graphics);
             
             while (count < linesPerPage && (lines.Length > cur))
             {
 
-                yPosition = e.MarginBounds.Left + (count * mainBox.Font.GetHeight(e.Graphics));
+                yPosition = e.MarginBounds.Left + (count * fontToPrint.GetHeight(e.Graphics));
                 if (yPosition > e.MarginBounds.Bottom)
                 {
                     e.HasMorePages = true;
                     return;
                 }
-                e.Graphics.DrawString(lines[cur], mainBox.Font, Brushes.Black, e.MarginBounds.Left, yPosition);
+                e.Graphics.DrawString(lines[cur], fontToPrint, Brushes.Black, e.MarginBounds.Left, yPosition);
                 if (lines[cur] != null && (lines[cur].Substring(0, 1) == "\n"))
                 {
                     count++;
-                    yPosition = e.MarginBounds.Left + (count * mainBox.Font.GetHeight(e.Graphics));
+                    yPosition = e.MarginBounds.Left + (count * fontToPrint.GetHeight(e.Graphics));
                     
                 }
                 cur++;
@@ -523,5 +525,29 @@ namespace Notepad__
             
         }
 
+        private void Help_AboutUs_Click(object sender, EventArgs e)
+        {
+            var thread = new Thread(NewThread);
+
+            thread.TrySetApartmentState(ApartmentState.STA);
+            thread.Start();
+        }
+
+        private static void NewThread()
+        {
+            Application.Run(new AboutUsForm());
+        }
+
+        private void Help_ViewHelp_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/cyberpook/Notepad--/blob/Dev_Environment/README.md");
+        }
+
+        private void Help_SendFeedback_Click(object sender, EventArgs e)
+        {
+
+            SendFeedbackForm feedbackForm = new SendFeedbackForm();
+            feedbackForm.ShowDialog(this);
+        }
     }
 }

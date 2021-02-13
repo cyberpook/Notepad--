@@ -52,6 +52,7 @@ namespace Notepad__
             this.Edit_DeleteButton = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Edit_FindButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.findNextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.Edit_SelectAllButton = new System.Windows.Forms.ToolStripMenuItem();
             this.Edit_TimeDateButton = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,15 +65,19 @@ namespace Notepad__
             this.smallerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.defaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.View_StatusBar_Button = new System.Windows.Forms.ToolStripMenuItem();
+            this.Help = new System.Windows.Forms.ToolStripDropDownButton();
+            this.Help_ViewHelp = new System.Windows.Forms.ToolStripMenuItem();
+            this.Help_SendFeedback = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.Help_AboutUs = new System.Windows.Forms.ToolStripMenuItem();
             this.StatusBar = new System.Windows.Forms.StatusStrip();
             this.Status_ScaleLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.Status_CurrentWord = new System.Windows.Forms.ToolStripStatusLabel();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.setup = new System.Windows.Forms.PageSetupDialog();
             this.DocToPrint = new System.Drawing.Printing.PrintDocument();
             this.print = new System.Windows.Forms.PrintDialog();
-            this.Status_CurrentWord = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
-            this.findNextToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1.SuspendLayout();
             this.StatusBar.SuspendLayout();
             this.SuspendLayout();
@@ -97,7 +102,8 @@ namespace Notepad__
             this.FileButton,
             this.EditButton,
             this.toolStripDropDownButton1,
-            this.viewButton});
+            this.viewButton,
+            this.Help});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(821, 25);
@@ -264,6 +270,13 @@ namespace Notepad__
             this.Edit_FindButton.Text = "Find (under development)";
             this.Edit_FindButton.Click += new System.EventHandler(this.Edit_FindButton_Click);
             // 
+            // findNextToolStripMenuItem
+            // 
+            this.findNextToolStripMenuItem.Name = "findNextToolStripMenuItem";
+            this.findNextToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
+            this.findNextToolStripMenuItem.Text = "Find Next";
+            this.findNextToolStripMenuItem.Click += new System.EventHandler(this.findNextToolStripMenuItem_Click);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -365,6 +378,46 @@ namespace Notepad__
             this.View_StatusBar_Button.Text = "Status Bar";
             this.View_StatusBar_Button.Click += new System.EventHandler(this.View_StatusBar_Button_Click);
             // 
+            // Help
+            // 
+            this.Help.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.Help.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Help_ViewHelp,
+            this.Help_SendFeedback,
+            this.toolStripSeparator4,
+            this.Help_AboutUs});
+            this.Help.Image = ((System.Drawing.Image)(resources.GetObject("Help.Image")));
+            this.Help.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.Help.Name = "Help";
+            this.Help.Size = new System.Drawing.Size(45, 22);
+            this.Help.Text = "Help";
+            // 
+            // Help_ViewHelp
+            // 
+            this.Help_ViewHelp.Name = "Help_ViewHelp";
+            this.Help_ViewHelp.Size = new System.Drawing.Size(180, 22);
+            this.Help_ViewHelp.Text = "View Help";
+            this.Help_ViewHelp.Click += new System.EventHandler(this.Help_ViewHelp_Click);
+            // 
+            // Help_SendFeedback
+            // 
+            this.Help_SendFeedback.Name = "Help_SendFeedback";
+            this.Help_SendFeedback.Size = new System.Drawing.Size(180, 22);
+            this.Help_SendFeedback.Text = "Send Feedback";
+            this.Help_SendFeedback.Click += new System.EventHandler(this.Help_SendFeedback_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
+            // 
+            // Help_AboutUs
+            // 
+            this.Help_AboutUs.Name = "Help_AboutUs";
+            this.Help_AboutUs.Size = new System.Drawing.Size(180, 22);
+            this.Help_AboutUs.Text = "About Us";
+            this.Help_AboutUs.Click += new System.EventHandler(this.Help_AboutUs_Click);
+            // 
             // StatusBar
             // 
             this.StatusBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -384,6 +437,20 @@ namespace Notepad__
             this.Status_ScaleLabel.Text = "100%";
             this.Status_ScaleLabel.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
             // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
+            this.toolStripStatusLabel1.Text = "|";
+            // 
+            // Status_CurrentWord
+            // 
+            this.Status_CurrentWord.Name = "Status_CurrentWord";
+            this.Status_CurrentWord.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Status_CurrentWord.Size = new System.Drawing.Size(156, 17);
+            this.Status_CurrentWord.Text = "Current word to find: (none)";
+            // 
             // setup
             // 
             this.setup.MinMargins = new System.Drawing.Printing.Margins(1, 1, 1, 1);
@@ -399,26 +466,6 @@ namespace Notepad__
             this.print.AllowSomePages = true;
             this.print.Document = this.DocToPrint;
             this.print.UseEXDialog = true;
-            // Status_CurrentWord
-            // 
-            this.Status_CurrentWord.Name = "Status_CurrentWord";
-            this.Status_CurrentWord.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Status_CurrentWord.Size = new System.Drawing.Size(156, 17);
-            this.Status_CurrentWord.Text = "Current word to find: (none)";
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(10, 17);
-            this.toolStripStatusLabel1.Text = "|";
-            // 
-            // findNextToolStripMenuItem
-            // 
-            this.findNextToolStripMenuItem.Name = "findNextToolStripMenuItem";
-            this.findNextToolStripMenuItem.Size = new System.Drawing.Size(236, 22);
-            this.findNextToolStripMenuItem.Text = "Find Next";
-            this.findNextToolStripMenuItem.Click += new System.EventHandler(this.findNextToolStripMenuItem_Click);
             // 
             // notepadMain
             // 
@@ -488,6 +535,11 @@ namespace Notepad__
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel Status_CurrentWord;
         private System.Windows.Forms.ToolStripMenuItem findNextToolStripMenuItem;
+        private System.Windows.Forms.ToolStripDropDownButton Help;
+        private System.Windows.Forms.ToolStripMenuItem Help_ViewHelp;
+        private System.Windows.Forms.ToolStripMenuItem Help_SendFeedback;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
+        private System.Windows.Forms.ToolStripMenuItem Help_AboutUs;
     }
 }
 
