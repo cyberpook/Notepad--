@@ -39,7 +39,7 @@ namespace Notepad__.Feedback
             // 
             this.passwordBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.passwordBox.Location = new System.Drawing.Point(44, 23);
-            this.passwordBox.Text.PasswordChar = '*';
+            this.passwordBox.PasswordChar = '*';
             this.passwordBox.Name = "passwordBox";
             this.passwordBox.Size = new System.Drawing.Size(264, 22);
             this.passwordBox.TabIndex = 1;
